@@ -222,7 +222,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      dark-picaai 1_0: -6812375697836095366
+      dark-picaai 1_1: 9041409565567848745
+      dark-picaai 1_2: -8810708725605478311
+      dark-picaai 1_3: -8559302540693154014
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
