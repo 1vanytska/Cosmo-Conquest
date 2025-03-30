@@ -22,8 +22,8 @@ public class TeamComparison : MonoBehaviour
         teamData["Team 1"] = new int[] { 350, 200, 200, 150, 100 };
         teamData["Team 2"] = new int[] { 400, 300, 200, 100, 0 };
         teamData["Team 3"] = new int[] { 250, 250, 250, 200, 50 };
-        teamData["Team 4"] = new int[] { 300, 150, 300, 200, 150 };
-        teamData["Team 5"] = new int[] { 200, 400, 100, 300, 200 };
+        teamData["Team 4"] = new int[] { 300, 300, 300, 50, 50 };
+        teamData["Team 5"] = new int[] { 400, 200, 200, 100, 100 };
 
         foreach (var team in teamData.Keys)
         {
