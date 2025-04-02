@@ -13,8 +13,7 @@ public class TeamComparison : MonoBehaviour
     void Start()
     {
         InitializeTeams();
-        CompareTeams();
-        DisplayResults();
+        StartCoroutine(AnimateTeams());
     }
 
     void InitializeTeams()
@@ -29,6 +28,53 @@ public class TeamComparison : MonoBehaviour
         {
             teamScores[team] = 0;
         }
+    }
+
+    IEnumerator AnimateTeams()
+    {
+        float animationDuration = 5f; // Трохи довша анімація
+        float elapsedTime = 0f;
+
+        while (elapsedTime < animationDuration)
+        {
+            // Оновлення випадкових цифр
+            string newResult = "Teams:\n";
+            foreach (var team in teamData)
+            {
+                string randomDigits = $"{Random.Range(0, 10)}";
+                newResult += $"{team.Key}: {randomDigits} points\n";
+            }
+
+            resultText.text = newResult;
+
+            // Зміна кольору команд по черзі
+            int teamIndex = (int)(elapsedTime / 0.3f) % teamData.Count;
+            string highlightedTeam = teamData.Keys.ElementAt(teamIndex);
+            string coloredResult = "Teams:\n";
+
+            foreach (var team in teamData.Keys)
+            {
+                string randomDigits = $"{Random.Range(0, 10)}";
+                
+                if (team == highlightedTeam)
+                {
+                    coloredResult += $"<color=#FFB588>{team}: {randomDigits} points</color>\n"; // Повний рядок іншим кольором
+                }
+                else
+                {
+                    coloredResult += $"{team}: {randomDigits} points\n";
+                }
+            }
+
+            resultText.text = coloredResult;
+
+            elapsedTime += 0.05f; // Цифри змінюються швидше, ніж колір команд
+            yield return new WaitForSeconds(0.05f);
+        }
+
+        // Після анімації виконуємо обчислення результатів
+        CompareTeams();
+        DisplayResults();
     }
 
     void CompareTeams()
@@ -64,7 +110,7 @@ public class TeamComparison : MonoBehaviour
         {
             if (winningTeams.Contains(team.Key))
             {
-                result += $"<color=#FFD700>{team.Key}: {team.Value} points</color>\n";
+                result += $"<color=#FF9B62>{team.Key}: {team.Value} points</color>\n"; // Виділяємо переможця
             }
             else
             {
@@ -72,38 +118,6 @@ public class TeamComparison : MonoBehaviour
             }
         }
 
-        Debug.Log(result);
-        if (resultText != null)
-        {
-            resultText.text = result;
-            if (winningTeams.Count == 1)
-            {
-                StartCoroutine(AnimateWinner(winningTeams[0]));
-            }
-        }
-    }
-
-    IEnumerator AnimateWinner(string winner)
-    {
-        TMP_Text text = resultText;
-        string originalText = text.text;
-        string winnerLine = originalText.Split('\n').FirstOrDefault(line => line.Contains(winner));
-
-        while (true)
-        {
-            string flashingText = winnerLine.Replace("<color=#FFD700>", "<color=#FFFFFF>").Replace("</color>", "<color=#FFD700>");
-            string newText = originalText.Replace(winnerLine, flashingText);
-
-            text.text = newText;
-
-            yield return new WaitForSeconds(0.5f);
-            text.text = originalText;
-            yield return new WaitForSeconds(0.5f);
-        }
+        resultText.text = result;
     }
 }
-
-
-
-
-
