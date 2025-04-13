@@ -8,6 +8,7 @@ using System.Text;
 public class RegistrationManager : MonoBehaviour
 {
     public TMPro.TMP_InputField nameInput;
+     public AudioSource clickSound;
     public TMPro.TMP_Text messageText;
     public string waitingRoomSceneName = "WaitingRoomScene";
 
@@ -19,6 +20,11 @@ public class RegistrationManager : MonoBehaviour
 
     public void OnRegisterClick()
     {
+        if (clickSound != null)
+            {
+                clickSound.Play();
+            }
+
         string playerName = nameInput.text;
         if (!string.IsNullOrEmpty(playerName))
         {
@@ -31,13 +37,19 @@ public class RegistrationManager : MonoBehaviour
         }
     }
 
+    [System.Serializable]
+    public class RegisterResponse
+    {
+        public int player_id;
+    }
+
     IEnumerator Register(string playerName)
     {
         PlayerData data = new PlayerData { username = playerName };
         string json = JsonUtility.ToJson(data);
         byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
 
-        using (UnityWebRequest www = new UnityWebRequest("https://50d6-93-175-201-90.ngrok-free.app/game_server/register.php", "POST"))
+        using (UnityWebRequest www = new UnityWebRequest("https://9954-93-175-201-90.ngrok-free.app/game_server/register.php", "POST"))
         {
             www.uploadHandler = new UploadHandlerRaw(bodyRaw);
             www.downloadHandler = new DownloadHandlerBuffer();
@@ -47,8 +59,13 @@ public class RegistrationManager : MonoBehaviour
 
             if (www.result == UnityWebRequest.Result.Success)
             {
+                RegisterResponse response = JsonUtility.FromJson<RegisterResponse>(www.downloadHandler.text);
+                int playerId = response.player_id;
+
+                PlayerPrefs.SetInt("PlayerID", playerId);
+
                 messageText.text = $"Registered successfully as {playerName}";
-                Debug.Log($"Registered successfully as {playerName}");
+                Debug.Log($"Registered as {playerName} with ID {playerId}");
 
                 yield return new WaitForSeconds(1f);
                 SceneManager.LoadScene(waitingRoomSceneName);
@@ -60,4 +77,5 @@ public class RegistrationManager : MonoBehaviour
             }
         }
     }
+
 }

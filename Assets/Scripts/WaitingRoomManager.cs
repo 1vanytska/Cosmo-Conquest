@@ -11,12 +11,18 @@ public class WaitingRoomManager : MonoBehaviour
     public TMP_Text statusText;
     public string gameSceneName = "GameScene";
 
-    private float countdownTime = 10f;
+    public AudioSource waitingSound;
+    public AudioSource startGameSound;
+
+    private float countdownTime = 180f;
     private float checkInterval = 5f;
     private float nextCheckTime = 0f;
 
     void Start()
     {
+        if (waitingSound != null)
+            waitingSound.Play();
+
         StartCoroutine(Countdown());
     }
 
@@ -48,7 +54,7 @@ public class WaitingRoomManager : MonoBehaviour
 
     IEnumerator CheckPlayerCount()
     {
-        using (UnityWebRequest www = UnityWebRequest.Get("https://50d6-93-175-201-90.ngrok-free.app/game_server/start_game.php"))
+        using (UnityWebRequest www = UnityWebRequest.Get("https://9954-93-175-201-90.ngrok-free.app/game_server/start_game.php"))
         {
             yield return www.SendWebRequest();
 
@@ -57,7 +63,7 @@ public class WaitingRoomManager : MonoBehaviour
                 var response = www.downloadHandler.text;
                 if (response.Contains("Game started"))
                 {
-                    SceneManager.LoadScene(gameSceneName);
+                    StartGameWithSound();
                 }
             }
             else
@@ -69,7 +75,7 @@ public class WaitingRoomManager : MonoBehaviour
 
     IEnumerator FinalCheck()
     {
-        using (UnityWebRequest www = UnityWebRequest.Get("https://50d6-93-175-201-90.ngrok-free.app/game_server/start_game.php"))
+        using (UnityWebRequest www = UnityWebRequest.Get("https://9954-93-175-201-90.ngrok-free.app/game_server/start_game.php"))
         {
             yield return www.SendWebRequest();
 
@@ -78,7 +84,7 @@ public class WaitingRoomManager : MonoBehaviour
                 var response = www.downloadHandler.text;
                 if (response.Contains("Game started"))
                 {
-                    SceneManager.LoadScene(gameSceneName);
+                    StartGameWithSound();
                 }
                 else
                 {
@@ -90,5 +96,22 @@ public class WaitingRoomManager : MonoBehaviour
                 statusText.text = "Error starting the game.";
             }
         }
+    }
+
+    void StartGameWithSound()
+    {
+        if (waitingSound != null)
+            waitingSound.Stop();
+
+        if (startGameSound != null)
+            startGameSound.Play();
+
+        StartCoroutine(LoadSceneAfterSound());
+    }
+
+    IEnumerator LoadSceneAfterSound()
+    {
+        yield return new WaitForSeconds(4f);
+        SceneManager.LoadScene(gameSceneName);
     }
 }
