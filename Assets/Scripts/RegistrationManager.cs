@@ -49,7 +49,7 @@ public class RegistrationManager : MonoBehaviour
         string json = JsonUtility.ToJson(data);
         byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
 
-        using (UnityWebRequest www = new UnityWebRequest("https://9954-93-175-201-90.ngrok-free.app/game_server/register.php", "POST"))
+        using (UnityWebRequest www = new UnityWebRequest("https://11f5-93-175-201-90.ngrok-free.app/game_server/register.php", "POST"))
         {
             www.uploadHandler = new UploadHandlerRaw(bodyRaw);
             www.downloadHandler = new DownloadHandlerBuffer();
