@@ -14,7 +14,7 @@ public class WaitingRoomManager : MonoBehaviour
     public AudioSource waitingSound;
     public AudioSource startGameSound;
 
-    private float countdownTime = 180f;
+    private float countdownTime = 10f;
     private float checkInterval = 5f;
     private float nextCheckTime = 0f;
 
@@ -54,7 +54,7 @@ public class WaitingRoomManager : MonoBehaviour
 
     IEnumerator CheckPlayerCount()
     {
-        using (UnityWebRequest www = UnityWebRequest.Get("https://9954-93-175-201-90.ngrok-free.app/game_server/start_game.php"))
+        using (UnityWebRequest www = UnityWebRequest.Get("https://11f5-93-175-201-90.ngrok-free.app/game_server/start_game.php"))
         {
             yield return www.SendWebRequest();
 
@@ -75,7 +75,7 @@ public class WaitingRoomManager : MonoBehaviour
 
     IEnumerator FinalCheck()
     {
-        using (UnityWebRequest www = UnityWebRequest.Get("https://9954-93-175-201-90.ngrok-free.app/game_server/start_game.php"))
+        using (UnityWebRequest www = UnityWebRequest.Get("https://11f5-93-175-201-90.ngrok-free.app/game_server/start_game.php"))
         {
             yield return www.SendWebRequest();
 
