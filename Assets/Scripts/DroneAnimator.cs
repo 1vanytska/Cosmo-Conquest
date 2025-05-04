@@ -1,4 +1,4 @@
-using System.Collections;
+using System.Collections; 
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,6 +18,9 @@ public class DroneAnimator : MonoBehaviour
     private Dictionary<Transform, List<Vector3>> targetPoints = new();
     private Dictionary<Transform, List<bool>> pointOccupied = new();
 
+    public AudioSource droneStartSound;
+    private bool soundPlayed = false;
+
     public void AnimateDrones(MoveData data)
     {
         Debug.Log("AnimateDrones called");
@@ -26,6 +29,13 @@ public class DroneAnimator : MonoBehaviour
         {
             Debug.LogError("Missing required references.");
             return;
+        }
+
+        if (!soundPlayed && droneStartSound != null)
+        {
+            droneStartSound.Play();
+            soundPlayed = true;
+            StartCoroutine(ResetSoundFlag(droneStartSound.clip.length));
         }
 
         Transform[] targets = { kronusTarget, lyrionTarget, mystaraTarget, eclipsiaTarget, fioraTarget };
@@ -137,5 +147,11 @@ public class DroneAnimator : MonoBehaviour
         }
 
         drone.transform.position = target;
+    }
+
+    IEnumerator ResetSoundFlag(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        soundPlayed = false;
     }
 }

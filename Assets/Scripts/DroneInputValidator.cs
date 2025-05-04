@@ -91,7 +91,7 @@ public class DroneInputValidator : MonoBehaviour
 
     IEnumerator SubmitData(string jsonData, MoveData data)
     {
-        using (UnityWebRequest www = new UnityWebRequest("https://11f5-93-175-201-90.ngrok-free.app/game_server/submit_move.php", "POST"))
+        using (UnityWebRequest www = new UnityWebRequest("https://aa8d-93-175-201-90.ngrok-free.app/game_server/submit_move.php", "POST"))
         {
             byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
             www.uploadHandler = new UploadHandlerRaw(bodyRaw);
@@ -119,7 +119,7 @@ public class DroneInputValidator : MonoBehaviour
 
     IEnumerator GetResults()
     {
-        using (UnityWebRequest www = UnityWebRequest.Get("https://11f5-93-175-201-90.ngrok-free.app/game_server/get_results.php"))
+        using (UnityWebRequest www = UnityWebRequest.Get("https://aa8d-93-175-201-90.ngrok-free.app/game_server/get_results.php"))
         {
             yield return www.SendWebRequest();
 

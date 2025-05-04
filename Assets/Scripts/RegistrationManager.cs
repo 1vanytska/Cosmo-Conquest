@@ -8,7 +8,7 @@ using System.Text;
 public class RegistrationManager : MonoBehaviour
 {
     public TMPro.TMP_InputField nameInput;
-     public AudioSource clickSound;
+    public AudioSource clickSound;
     public TMPro.TMP_Text messageText;
     public string waitingRoomSceneName = "WaitingRoomScene";
 
@@ -16,14 +16,21 @@ public class RegistrationManager : MonoBehaviour
     public class PlayerData
     {
         public string username;
+        public string uuid;
+    }
+
+    [System.Serializable]
+    public class RegisterResponse
+    {
+        public int player_id;
     }
 
     public void OnRegisterClick()
     {
         if (clickSound != null)
-            {
-                clickSound.Play();
-            }
+        {
+            clickSound.Play();
+        }
 
         string playerName = nameInput.text;
         if (!string.IsNullOrEmpty(playerName))
@@ -37,19 +44,24 @@ public class RegistrationManager : MonoBehaviour
         }
     }
 
-    [System.Serializable]
-    public class RegisterResponse
+    private string GetOrGenerateUUID()
     {
-        public int player_id;
+        if (!PlayerPrefs.HasKey("uuid"))
+        {
+            string uuid = System.Guid.NewGuid().ToString();
+            PlayerPrefs.SetString("uuid", uuid);
+        }
+        return PlayerPrefs.GetString("uuid");
     }
 
     IEnumerator Register(string playerName)
     {
-        PlayerData data = new PlayerData { username = playerName };
+        string uuid = GetOrGenerateUUID();
+        PlayerData data = new PlayerData { username = playerName, uuid = uuid };
         string json = JsonUtility.ToJson(data);
         byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
 
-        using (UnityWebRequest www = new UnityWebRequest("https://11f5-93-175-201-90.ngrok-free.app/game_server/register.php", "POST"))
+        using (UnityWebRequest www = new UnityWebRequest("https://aa8d-93-175-201-90.ngrok-free.app/game_server/register.php", "POST"))
         {
             www.uploadHandler = new UploadHandlerRaw(bodyRaw);
             www.downloadHandler = new DownloadHandlerBuffer();
@@ -77,5 +89,4 @@ public class RegistrationManager : MonoBehaviour
             }
         }
     }
-
 }
