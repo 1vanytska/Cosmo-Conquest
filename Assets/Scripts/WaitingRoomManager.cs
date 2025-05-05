@@ -60,7 +60,7 @@ public class WaitingRoomManager : MonoBehaviour
 
     IEnumerator CheckGameStatus()
     {
-        using (UnityWebRequest www = UnityWebRequest.Get("https://aa8d-93-175-201-90.ngrok-free.app/game_server/start_game.php"))
+        using (UnityWebRequest www = UnityWebRequest.Get("https://d962-93-175-201-90.ngrok-free.app/game_server/start_game.php"))
         {
             yield return www.SendWebRequest();
 
@@ -85,7 +85,7 @@ public class WaitingRoomManager : MonoBehaviour
 
     IEnumerator RequestGameStart()
     {
-        using (UnityWebRequest www = UnityWebRequest.PostWwwForm("https://aa8d-93-175-201-90.ngrok-free.app/game_server/start_game.php", ""))
+        using (UnityWebRequest www = UnityWebRequest.PostWwwForm("https://d962-93-175-201-90.ngrok-free.app/game_server/start_game.php", ""))
         {
             yield return www.SendWebRequest();
 

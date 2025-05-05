@@ -16,13 +16,13 @@ public class RegistrationManager : MonoBehaviour
     public class PlayerData
     {
         public string username;
-        public string uuid;
     }
 
     [System.Serializable]
     public class RegisterResponse
     {
         public int player_id;
+        public string error;
     }
 
     public void OnRegisterClick()
@@ -32,7 +32,7 @@ public class RegistrationManager : MonoBehaviour
             clickSound.Play();
         }
 
-        string playerName = nameInput.text;
+        string playerName = nameInput.text.Trim();
         if (!string.IsNullOrEmpty(playerName))
         {
             messageText.text = "Registering " + playerName + "...";
@@ -44,24 +44,13 @@ public class RegistrationManager : MonoBehaviour
         }
     }
 
-    private string GetOrGenerateUUID()
-    {
-        if (!PlayerPrefs.HasKey("uuid"))
-        {
-            string uuid = System.Guid.NewGuid().ToString();
-            PlayerPrefs.SetString("uuid", uuid);
-        }
-        return PlayerPrefs.GetString("uuid");
-    }
-
     IEnumerator Register(string playerName)
     {
-        string uuid = GetOrGenerateUUID();
-        PlayerData data = new PlayerData { username = playerName, uuid = uuid };
+        PlayerData data = new PlayerData { username = playerName };
         string json = JsonUtility.ToJson(data);
         byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
 
-        using (UnityWebRequest www = new UnityWebRequest("https://aa8d-93-175-201-90.ngrok-free.app/game_server/register.php", "POST"))
+        using (UnityWebRequest www = new UnityWebRequest("https://d962-93-175-201-90.ngrok-free.app/game_server/register.php", "POST"))
         {
             www.uploadHandler = new UploadHandlerRaw(bodyRaw);
             www.downloadHandler = new DownloadHandlerBuffer();
@@ -72,12 +61,18 @@ public class RegistrationManager : MonoBehaviour
             if (www.result == UnityWebRequest.Result.Success)
             {
                 RegisterResponse response = JsonUtility.FromJson<RegisterResponse>(www.downloadHandler.text);
-                int playerId = response.player_id;
 
-                PlayerPrefs.SetInt("PlayerID", playerId);
+                if (!string.IsNullOrEmpty(response.error))
+                {
+                    messageText.text = "Error: " + response.error;
+                    Debug.LogWarning("Registration error: " + response.error);
+                    yield break;
+                }
+
+                PlayerPrefs.SetInt("PlayerID", response.player_id);
 
                 messageText.text = $"Registered successfully as {playerName}";
-                Debug.Log($"Registered as {playerName} with ID {playerId}");
+                Debug.Log($"Registered as {playerName} with ID {response.player_id}");
 
                 yield return new WaitForSeconds(1f);
                 SceneManager.LoadScene(waitingRoomSceneName);
