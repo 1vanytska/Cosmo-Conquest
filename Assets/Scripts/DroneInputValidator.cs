@@ -223,6 +223,24 @@ public class DroneInputValidator : MonoBehaviour
         if (winnerEntry.player_id == localPlayerId)
         {
             HighlightWinnerPlanets();
+            StartCoroutine(ClearGameData());
+        }
+    }
+
+    IEnumerator ClearGameData()
+    {
+        using (UnityWebRequest www = UnityWebRequest.Get("https://2295-93-175-201-90.ngrok-free.app/game_server/clear_game_data.php"))
+        {
+            yield return www.SendWebRequest();
+
+            if (www.result == UnityWebRequest.Result.Success)
+            {
+                Debug.Log("Game data cleared from database.");
+            }
+            else
+            {
+                Debug.LogError("Failed to clear game data: " + www.error);
+            }
         }
     }
 
