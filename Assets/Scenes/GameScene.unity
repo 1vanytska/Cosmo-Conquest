@@ -5125,7 +5125,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 1109, y: -368}
-  m_SizeDelta: {x: 511.8, y: 86}
+  m_SizeDelta: {x: 550, y: 86}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &108142974
 MonoBehaviour:
@@ -5148,10 +5148,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.8113208, g: 0, b: 0.6299668, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_NormalColor: {r: 0.82641506, g: 0.04210032, b: 0.6539479, a: 1}
+    m_HighlightedColor: {r: 1, g: 0, b: 0.7879677, a: 1}
     m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_SelectedColor: {r: 1, g: 0.4660377, b: 0.88134164, a: 1}
     m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -5413,7 +5413,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 487, y: -745}
-  m_SizeDelta: {x: 511.8, y: 86}
+  m_SizeDelta: {x: 550, y: 86}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &120411937
 MonoBehaviour:
@@ -5437,9 +5437,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.6830188, g: 0.28738335, b: 0.28738335, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.83396226, g: 0.19354212, b: 0.19354212, a: 1}
     m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_SelectedColor: {r: 1, g: 0.4584905, b: 0.4584905, a: 1}
     m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -5554,6 +5554,139 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 120411935}
   m_CullTransparentMesh: 1
+--- !u!1 &176782591
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 176782592}
+  - component: {fileID: 176782593}
+  m_Layer: 0
+  m_Name: Audio Source
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &176782592
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 176782591}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 206137266}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!82 &176782593
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 176782591}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: cc0c55fd0d0cd6a4da2f9cc1075286dc, type: 3}
+  m_Resource: {fileID: 8300000, guid: cc0c55fd0d0cd6a4da2f9cc1075286dc, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &200060937
 GameObject:
   m_ObjectHideFlags: 0
@@ -5595,6 +5728,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 519420032}
   circleRadius: 0.5
   droneZ: -0.3
+  droneStartSound: {fileID: 176782593}
 --- !u!4 &200060939
 Transform:
   m_ObjectHideFlags: 0
@@ -5650,6 +5784,7 @@ RectTransform:
   - {fileID: 304715224}
   - {fileID: 328059703}
   - {fileID: 1445820842}
+  - {fileID: 176782592}
   m_Father: {fileID: 1511917038}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -6206,7 +6341,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 1
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -6819,7 +6954,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter the number
+  m_text: Mystara <= Lyrion
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6935,7 +7070,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -1089, y: -674}
-  m_SizeDelta: {x: 511.8, y: 86}
+  m_SizeDelta: {x: 550, y: 86}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &592381552
 MonoBehaviour:
@@ -6959,9 +7094,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.28627452, g: 0.32307485, b: 0.68235296, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.1825632, g: 0.40360275, b: 0.87169814, a: 1}
     m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_SelectedColor: {r: 0.5641509, g: 0.60298896, b: 1, a: 1}
     m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -7238,7 +7373,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter the number
+  m_text: Kronus >= Lyrion
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7671,7 +7806,7 @@ Transform:
   m_GameObject: {fileID: 870439600}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -16.6008, y: 2.7193692, z: 0}
+  m_LocalPosition: {x: -16.44, y: 2.32, z: 0}
   m_LocalScale: {x: 0.33986723, y: 0.33986723, z: 0.48325726}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8153,7 +8288,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter the number
+  m_text: Lyrion <= Kronus
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8314,7 +8449,7 @@ Transform:
   m_GameObject: {fileID: 1005111259}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.5612662, y: -2.21344, z: 0}
+  m_LocalPosition: {x: -2.36, y: -2.25, z: 0}
   m_LocalScale: {x: 0.32561183, y: 0.32561183, z: 0.32561183}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8540,7 +8675,7 @@ Transform:
   m_GameObject: {fileID: 1252238851}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.561266, y: -2.21344, z: 0}
+  m_LocalPosition: {x: -2.52, y: -2.33, z: 0}
   m_LocalScale: {x: 1.1951345, y: 1.1951345, z: 1.1951346}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8877,7 +9012,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.1
+      scalar: 0.07
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -13428,7 +13563,7 @@ Transform:
   m_GameObject: {fileID: 1278040207}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.403168, y: -0.5691703, z: 0}
+  m_LocalPosition: {x: -10.16, y: -0.5691703, z: 0}
   m_LocalScale: {x: 1.1609967, y: 1.1609967, z: 1.1609967}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13997,7 +14132,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 1
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -14259,7 +14394,7 @@ Transform:
   m_GameObject: {fileID: 1507895412}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.96443, y: -0.7588937, z: 0}
+  m_LocalPosition: {x: 5.09, y: -0.76, z: 0}
   m_LocalScale: {x: 1.2801763, y: 1.2801763, z: 1.2801763}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14314,8 +14449,8 @@ Transform:
   m_GameObject: {fileID: 1511729073}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.96443, y: -0.7588937, z: 0}
-  m_LocalScale: {x: 1.1951345, y: 1.1951345, z: 1.1951346}
+  m_LocalPosition: {x: 5.09, y: -1.04, z: 0}
+  m_LocalScale: {x: 1.2204713, y: 1.2204713, z: 1.2204714}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1511917038}
@@ -14651,7 +14786,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.1
+      scalar: 0.07
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -19313,7 +19448,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -286, y: -878}
-  m_SizeDelta: {x: 511.8, y: 86}
+  m_SizeDelta: {x: 550, y: 86}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1661426747
 MonoBehaviour:
@@ -19337,9 +19472,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.28627452, g: 0.68235296, b: 0.31336963, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0, g: 0.6830188, b: 0.047337882, a: 1}
     m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_SelectedColor: {r: 0.49622637, g: 1, b: 0.53114134, a: 1}
     m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -19668,7 +19803,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter the number
+  m_text: Fiora <=Eclipsia
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -19758,6 +19893,7 @@ GameObject:
   - component: {fileID: 1802847089}
   - component: {fileID: 1802847088}
   - component: {fileID: 1802847090}
+  - component: {fileID: 1802847091}
   m_Layer: 2
   m_Name: GameManager
   m_TagString: Untagged
@@ -19820,6 +19956,103 @@ MonoBehaviour:
   mystaraParticles: {fileID: 1252238854}
   eclipsiaParticles: {fileID: 1886237163}
   fioraParticles: {fileID: 23618521}
+--- !u!82 &1802847091
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802847087}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 1eaaf7c3e2f5c174c8188e3a1444740b, type: 3}
+  m_Resource: {fileID: 8300000, guid: 1eaaf7c3e2f5c174c8188e3a1444740b, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1842555597
 GameObject:
   m_ObjectHideFlags: 0
@@ -19847,7 +20080,7 @@ Transform:
   m_GameObject: {fileID: 1842555597}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.40317, y: -0.5691703, z: 0}
+  m_LocalPosition: {x: -10.08, y: -0.5691703, z: 0}
   m_LocalScale: {x: 1.1951345, y: 1.1951345, z: 1.1951346}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20184,7 +20417,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.1
+      scalar: 0.07
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -24786,8 +25019,8 @@ Transform:
   m_GameObject: {fileID: 1886237160}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -16.6008, y: 2.719369, z: 0}
-  m_LocalScale: {x: 1.1951345, y: 1.1951345, z: 1.1951346}
+  m_LocalPosition: {x: -16.05, y: 2.52, z: -0.2}
+  m_LocalScale: {x: 1.1061869, y: 1.1061869, z: 1.106187}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1511917038}
@@ -29629,7 +29862,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -1691, y: -342}
-  m_SizeDelta: {x: 511.8, y: 86}
+  m_SizeDelta: {x: 550, y: 86}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1894277819
 MonoBehaviour:
@@ -29652,10 +29885,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.41804102, g: 0.16432182, b: 0.5924529, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_NormalColor: {r: 0.49985752, g: 0.12893553, b: 0.7509433, a: 1}
+    m_HighlightedColor: {r: 0.6421691, g: 0.111320674, b: 1, a: 1}
     m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_SelectedColor: {r: 0.7652473, g: 0.5187967, b: 0.93207544, a: 1}
     m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -29848,7 +30081,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter the number
+  m_text: Eclipsia <= Mystara
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

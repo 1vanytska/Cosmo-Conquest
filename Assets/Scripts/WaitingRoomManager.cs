@@ -1,4 +1,4 @@
-using UnityEngine; 
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
@@ -14,9 +14,11 @@ public class WaitingRoomManager : MonoBehaviour
     public AudioSource waitingSound;
     public AudioSource startGameSound;
 
-    private float countdownTime = 10f;
-    private float checkInterval = 5f;
+    private float countdownTime = 60f;
+    private float checkInterval = 3f;
     private float nextCheckTime = 0f;
+    private bool gameStarted = false;
+    private bool requestedStart = false;
 
     void Start()
     {
@@ -28,33 +30,37 @@ public class WaitingRoomManager : MonoBehaviour
 
     IEnumerator Countdown()
     {
-        while (countdownTime > 0)
+        while (!gameStarted)
         {
-            countdownTime -= Time.deltaTime;
+            if (countdownTime > 0)
+            {
+                countdownTime -= Time.deltaTime;
+                countdownTime = Mathf.Max(countdownTime, 0);
 
-            if (countdownTime < 0)
-                countdownTime = 0;
+                int minutes = Mathf.FloorToInt(countdownTime / 60);
+                int seconds = Mathf.FloorToInt(countdownTime % 60);
+                timerText.text = string.Format("{0:D2}:{1:D2}", minutes, seconds);
+            }
 
-            int minutes = Mathf.FloorToInt(countdownTime / 60);
-            int seconds = Mathf.FloorToInt(countdownTime % 60);
-
-            timerText.text = string.Format("{0:D2}:{1:D2}", minutes, seconds);
+            if (countdownTime <= 0 && !requestedStart)
+            {
+                requestedStart = true;
+                StartCoroutine(RequestGameStart());
+            }
 
             if (Time.time >= nextCheckTime)
             {
                 nextCheckTime = Time.time + checkInterval;
-                StartCoroutine(CheckPlayerCount());
+                StartCoroutine(CheckGameStatus());
             }
 
             yield return null;
         }
-
-        StartCoroutine(FinalCheck());
     }
 
-    IEnumerator CheckPlayerCount()
+    IEnumerator CheckGameStatus()
     {
-        using (UnityWebRequest www = UnityWebRequest.Get("https://11f5-93-175-201-90.ngrok-free.app/game_server/start_game.php"))
+        using (UnityWebRequest www = UnityWebRequest.Get("https://2295-93-175-201-90.ngrok-free.app/game_server/start_game.php"))
         {
             yield return www.SendWebRequest();
 
@@ -63,19 +69,23 @@ public class WaitingRoomManager : MonoBehaviour
                 var response = www.downloadHandler.text;
                 if (response.Contains("Game started"))
                 {
-                    StartGameWithSound();
+                    if (!gameStarted)
+                    {
+                        gameStarted = true;
+                        StartGameWithSound();
+                    }
                 }
             }
             else
             {
-                statusText.text = "Error checking player count.";
+                statusText.text = "Error checking game status.";
             }
         }
     }
 
-    IEnumerator FinalCheck()
+    IEnumerator RequestGameStart()
     {
-        using (UnityWebRequest www = UnityWebRequest.Get("https://11f5-93-175-201-90.ngrok-free.app/game_server/start_game.php"))
+        using (UnityWebRequest www = UnityWebRequest.PostWwwForm("https://2295-93-175-201-90.ngrok-free.app/game_server/start_game.php", ""))
         {
             yield return www.SendWebRequest();
 
@@ -84,22 +94,28 @@ public class WaitingRoomManager : MonoBehaviour
                 var response = www.downloadHandler.text;
                 if (response.Contains("Game started"))
                 {
-                    StartGameWithSound();
+                    if (!gameStarted)
+                    {
+                        gameStarted = true;
+                        StartGameWithSound();
+                    }
                 }
                 else
                 {
-                    statusText.text = "Not enough players to start the game.";
+                    statusText.text = "Waiting for more players...";
                 }
             }
             else
             {
-                statusText.text = "Error starting the game.";
+                statusText.text = "Error trying to start the game.";
             }
         }
     }
 
     void StartGameWithSound()
     {
+        StopAllCoroutines();
+
         if (waitingSound != null)
             waitingSound.Stop();
 
