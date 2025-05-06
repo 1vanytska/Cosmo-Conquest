@@ -69,7 +69,7 @@ public class DroneInputValidator : MonoBehaviour
 
         string jsonData = JsonUtility.ToJson(data);
 
-        using (UnityWebRequest www = new UnityWebRequest("https://2295-93-175-201-90.ngrok-free.app/game_server/submit_move.php", "POST"))
+        using (UnityWebRequest www = new UnityWebRequest($"{ServerConfig.BaseUrl}/submit_move.php", "POST"))
         {
             byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
             www.uploadHandler = new UploadHandlerRaw(bodyRaw);
@@ -100,7 +100,7 @@ public class DroneInputValidator : MonoBehaviour
         while (!allMovesSubmitted)
         {
             errorText.text = "Waiting for other players...";
-            using (UnityWebRequest checkRequest = UnityWebRequest.Get("https://2295-93-175-201-90.ngrok-free.app/game_server/check_all_submitted.php"))
+            using (UnityWebRequest checkRequest = UnityWebRequest.Get($"{ServerConfig.BaseUrl}/check_all_submitted.php"))
             {
                 yield return checkRequest.SendWebRequest();
 
@@ -129,7 +129,7 @@ public class DroneInputValidator : MonoBehaviour
     IEnumerator GetResults()
     {
         errorText.text = "";
-        using (UnityWebRequest www = UnityWebRequest.Get("https://2295-93-175-201-90.ngrok-free.app/game_server/get_results.php"))
+        using (UnityWebRequest www = UnityWebRequest.Get($"{ServerConfig.BaseUrl}/get_results.php"))
         {
             yield return www.SendWebRequest();
 
@@ -229,7 +229,7 @@ public class DroneInputValidator : MonoBehaviour
 
     IEnumerator ClearGameData()
     {
-        using (UnityWebRequest www = UnityWebRequest.Get("https://2295-93-175-201-90.ngrok-free.app/game_server/clear_game_data.php"))
+        using (UnityWebRequest www = UnityWebRequest.Get($"{ServerConfig.BaseUrl}/clear_game_data.php"))
         {
             yield return www.SendWebRequest();
 
