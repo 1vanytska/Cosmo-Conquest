@@ -50,7 +50,7 @@ public class RegistrationManager : MonoBehaviour
         string json = JsonUtility.ToJson(data);
         byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
 
-        using (UnityWebRequest www = new UnityWebRequest("https://d962-93-175-201-90.ngrok-free.app/game_server/register.php", "POST"))
+        using (UnityWebRequest www = new UnityWebRequest("https://2295-93-175-201-90.ngrok-free.app/game_server/register.php", "POST"))
         {
             www.uploadHandler = new UploadHandlerRaw(bodyRaw);
             www.downloadHandler = new DownloadHandlerBuffer();
@@ -70,6 +70,7 @@ public class RegistrationManager : MonoBehaviour
                 }
 
                 PlayerPrefs.SetInt("PlayerID", response.player_id);
+                PlayerPrefs.Save();
 
                 messageText.text = $"Registered successfully as {playerName}";
                 Debug.Log($"Registered as {playerName} with ID {response.player_id}");

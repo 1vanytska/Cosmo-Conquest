@@ -69,7 +69,7 @@ public class DroneInputValidator : MonoBehaviour
 
         string jsonData = JsonUtility.ToJson(data);
 
-        using (UnityWebRequest www = new UnityWebRequest("https://d962-93-175-201-90.ngrok-free.app/game_server/submit_move.php", "POST"))
+        using (UnityWebRequest www = new UnityWebRequest("https://2295-93-175-201-90.ngrok-free.app/game_server/submit_move.php", "POST"))
         {
             byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
             www.uploadHandler = new UploadHandlerRaw(bodyRaw);
@@ -100,7 +100,7 @@ public class DroneInputValidator : MonoBehaviour
         while (!allMovesSubmitted)
         {
             errorText.text = "Waiting for other players...";
-            using (UnityWebRequest checkRequest = UnityWebRequest.Get("https://d962-93-175-201-90.ngrok-free.app/game_server/check_all_submitted.php"))
+            using (UnityWebRequest checkRequest = UnityWebRequest.Get("https://2295-93-175-201-90.ngrok-free.app/game_server/check_all_submitted.php"))
             {
                 yield return checkRequest.SendWebRequest();
 
@@ -129,7 +129,7 @@ public class DroneInputValidator : MonoBehaviour
     IEnumerator GetResults()
     {
         errorText.text = "";
-        using (UnityWebRequest www = UnityWebRequest.Get("https://d962-93-175-201-90.ngrok-free.app/game_server/get_results.php"))
+        using (UnityWebRequest www = UnityWebRequest.Get("https://2295-93-175-201-90.ngrok-free.app/game_server/get_results.php"))
         {
             yield return www.SendWebRequest();
 
@@ -175,69 +175,65 @@ public class DroneInputValidator : MonoBehaviour
     }
 
     IEnumerator AnimateFinalResults(Dictionary<string, ResultEntry> finalResults)
-{
-    float animationDuration = 5f;
-    float elapsedTime = 0f;
-    List<string> teams = finalResults.Keys.ToList();
-
-    while (elapsedTime < animationDuration)
     {
-        string coloredResult = "";
+        float animationDuration = 5f;
+        float elapsedTime = 0f;
+        List<string> teams = finalResults.Keys.ToList();
 
-        int teamIndex = (int)(elapsedTime / 0.3f) % teams.Count;
-        string highlightedTeam = teams[teamIndex];
-
-        foreach (var team in teams)
+        while (elapsedTime < animationDuration)
         {
-            string randomDigits = $"{Random.Range(0, 8)}";
+            string coloredResult = "";
 
-            if (team == highlightedTeam)
-                coloredResult += $"<color=#FFB588>{team}: {randomDigits} points</color>\n";
-            else
-                coloredResult += $"{team}: {randomDigits} points\n";
-        }
+            int teamIndex = (int)(elapsedTime / 0.3f) % teams.Count;
+            string highlightedTeam = teams[teamIndex];
 
-        resultText.text = coloredResult;
-
-        elapsedTime += 0.05f;
-        yield return new WaitForSeconds(0.05f);
-    }
-
-    yield return new WaitForSeconds(0.5f);
-
-    ResultEntry winnerEntry = finalResults.Values.Aggregate((x, y) => x.score > y.score ? x : y);
-
-    string finalResult = "";
-    foreach (var kvp in finalResults.OrderByDescending(k => k.Value.score))
-    {
-        if (kvp.Key == winnerEntry.username)
-            finalResult += $"<color=#FFD700><b>{kvp.Key}</b>: {kvp.Value.score} points</color>\n";
-        else
-            finalResult += $"{kvp.Key}: {kvp.Value.score} points\n";
-    }
-
-    resultText.text = finalResult;
-
-    HighlightWinnerPlanets(winnerEntry.username);
-}
-
-    void HighlightWinnerPlanets(string winnerUsername)
-        {
-            kronusParticles.Stop();
-            lyrionParticles.Stop();
-            mystaraParticles.Stop();
-            eclipsiaParticles.Stop();
-            fioraParticles.Stop();
-
-            if (winnerUsername == PlayerPrefs.GetString("Username"))
+            foreach (var team in teams)
             {
-                kronusParticles.Play();
-                lyrionParticles.Play();
-                mystaraParticles.Play();
-                eclipsiaParticles.Play();
-                fioraParticles.Play();
+                string randomDigits = $"{Random.Range(0, 8)}";
+
+                if (team == highlightedTeam)
+                    coloredResult += $"<color=#FFB588>{team}: {randomDigits} points</color>\n";
+                else
+                    coloredResult += $"{team}: {randomDigits} points\n";
             }
+
+            resultText.text = coloredResult;
+
+            elapsedTime += 0.05f;
+            yield return new WaitForSeconds(0.05f);
         }
+
+        yield return new WaitForSeconds(0.5f);
+
+        var winnerEntry = finalResults.Values.Aggregate((x, y) => x.score > y.score ? x : y);
+        
+        int localPlayerId = PlayerPrefs.GetInt("PlayerID");
+
+        string finalResult = "";
+        foreach (var kvp in finalResults.OrderByDescending(k => k.Value.score))
+        {
+            if (kvp.Key == winnerEntry.username)
+                finalResult += $"<color=#FFD700><b>{kvp.Key}</b>: {kvp.Value.score} points</color>\n";
+            else
+                finalResult += $"{kvp.Key}: {kvp.Value.score} points\n";
+        }
+
+        resultText.text = finalResult;
+
+        if (winnerEntry.player_id == localPlayerId)
+        {
+            HighlightWinnerPlanets();
+        }
+    }
+
+    void HighlightWinnerPlanets()
+    {
+        kronusParticles.Play();
+        lyrionParticles.Play();
+        mystaraParticles.Play();
+        eclipsiaParticles.Play();
+        fioraParticles.Play();
+    }
 
     string GetTopPlanet(ResultEntry entry)
     {
@@ -284,8 +280,14 @@ public class MoveData
 [System.Serializable]
 public class ResultEntry
 {
+    public int player_id;
     public string username;
-    public int score, kronus, lyrion, mystara, eclipsia, fiora;
+    public int score;
+    public int kronus;
+    public int lyrion;
+    public int mystara;
+    public int eclipsia;
+    public int fiora;
 }
 
 [System.Serializable]
