@@ -1,0 +1,16 @@
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    status VARCHAR(50) NOT NULL DEFAULT 'waiting'
+);
+
+CREATE TABLE games (
+    game_id SERIAL PRIMARY KEY,
+    player_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    kronus INTEGER NOT NULL,
+    lyrion INTEGER NOT NULL,
+    mystara INTEGER NOT NULL,
+    eclipsia INTEGER NOT NULL,
+    fiora INTEGER NOT NULL,
+    score INTEGER DEFAULT 0
+);
