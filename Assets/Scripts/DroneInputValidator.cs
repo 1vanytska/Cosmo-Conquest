@@ -223,6 +223,7 @@ public class DroneInputValidator : MonoBehaviour
         if (winnerEntry.player_id == localPlayerId)
         {
             HighlightWinnerPlanets();
+            yield return new WaitForSeconds(30f);
             StartCoroutine(ClearGameData());
         }
     }

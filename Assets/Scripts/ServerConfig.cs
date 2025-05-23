@@ -1,4 +1,4 @@
 public static class ServerConfig
 {
-    public static string BaseUrl = "https://2295-93-175-201-90.ngrok-free.app/game_server";
+    public static string BaseUrl = "https://59c9-5-248-43-116.ngrok-free.app/game_server";
 }
